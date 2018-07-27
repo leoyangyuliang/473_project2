@@ -1,2 +1,8 @@
-use command to run: <br>
-<li> npm start </li>
+install firebase first,
+
+​	$ npm install firebase --save
+
+then use command to run: 
+
+​	npm start 
+
