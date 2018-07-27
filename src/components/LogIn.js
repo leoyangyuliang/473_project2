@@ -50,15 +50,20 @@ class App extends Component {
   }
 
   render() {
+    const divStyle = {
+      textAlign: 'center',
+    };
     return (
-        <div>
-          <form>
+        <div style={divStyle}>
+          <form class="form-group">
             <label>
-              Name:
-              <input type="text" value={this.state.username} onChange={(e) => this.handleChangeUsername(e)} />
+              Username: <br/>
+              <input type="email" placeholder="Enter email" value={this.state.username}
+              onChange={(e) => this.handleChangeUsername(e)} />
               <br/>
-              Password:
-              <input type="text" value={this.state.password} onChange={(e) => this.handleChangePassword(e)} />
+              Password:<br/>
+              <input type="password" placeholder="Enter password" value={this.state.password}
+              onChange={(e) => this.handleChangePassword(e)} />
             </label>
             <br/>
             <div class="btn-group" role="group" aria-label="Basic example">
