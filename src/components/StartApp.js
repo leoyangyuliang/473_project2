@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import Login from './Login';
 import * as firebase from 'firebase';
 import App from './App';
+import Chat from './Chat';
+
 function CheckAuthState(){
   var page = null;
   var user = firebase.auth().currentUser;
   if (user) {
     // User is signed in.
-    page = <App />
+    page = <div><App /> <Chat /></div>;
   } else {
     // No user is signed in.
     page =  <Login />;

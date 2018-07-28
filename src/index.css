@@ -1,18 +1,85 @@
 body {
-  background-color: #FFCC00;
+  background-image: url("./pics/background.jpg");
   padding: 20px;
   margin: 0;
 }
+
+.chat-container{
+ background-color:#fff;
+ max-width: 80%;
+ height: 500px;
+
+ display:flex;
+ flex-direction: column;
+}
+
+.chat-head{
+ background-color: #6699cc;
+ padding: 5px;
+}
+
+.chat-body{
+ background-color: powerblue;
+ padding: 5px;
+ flex: 1;
+
+ display:flex;
+ flex-direction: column;
+}
+
+.chat-footer{
+ background-color: lightgreen;
+ padding: .5em;
+ display: flex;
+}
+
+.textarea{
+ flex: 1;
+ resize: none;
+}
+
+@media screen and (max-width:760px){
+ .chat-container{
+   max-width: 100px;
+ }
+
+
+}
+
+.left-message{
+ background-color: #fff;
+ padding: 5px;
+ align-self: flex-start;
+ border-radius: 5px;
+ box-shadow:1px 1px 2px 2px rgba(0,0,0,.5);
+}
+
+.right-message{
+ background-color: #333;
+ padding: .5em;
+ color:#fff;
+ align-self: flex-end;
+ border-radius: 5px;
+ box-shadow:1px 1px 2px 2px rgba(0,0,0,.5);
+}
+
+
 h1, h2, p, ul, li {
   font-family: sans-serif;
 }
 
 .title{
+  color: #FFFFC0;
   text-align: center;
 }
 
+#password{
+  order: 1;
+}
 
-
+.navigationbar{
+    background-image: url("./pics/appbackground.jpg");
+}
 
 ul.header li {
   display: inline;
@@ -31,8 +98,9 @@ ul.header li a {
   display: inline-block;
 }
 .content {
-  background-color: green;
+  background-image: url("./pics/appbackground.jpg");
   padding: 20px;
+  color: #FFFFD0;
 }
 .content h2 {
   padding: 0;

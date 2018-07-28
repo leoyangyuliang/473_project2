@@ -28,7 +28,7 @@ class Login extends Component {
     e.preventDefault();
     firebase.auth().createUserWithEmailAndPassword(this.state.username, this.state.password)
     .then(function(firebaseUser) {
-      
+
     })
     .catch(function(error) {
       // Handle Errors here.
@@ -78,18 +78,18 @@ class Login extends Component {
               onChange={(e) => this.handleChangeUsername(e)} />
               <br/>
               Password<br/>
-              <input type="password" placeholder="Enter password" value={this.state.password}
+              <input id="password" type="password" placeholder="Enter password" value={this.state.password}
               onChange={(e) => this.handleChangePassword(e)} />
             </label>
             <br/>
             <div class="btn-group" role="group" aria-label="Basic example">
-              <Link class="btn btn-secondary" to="/StartApp"
+              <Link id="loginbtn" class="btn btn-secondary" to="/StartApp"
               onClick={(e) => this.handleLogIn(e)} >Log In</Link>
               <div>
                       {this.renderRedirect()}
               </div>
-              <button class="btn btn-secondary"
-              onClick={(e) => this.handleSignUp(e)}>Sign Up</button>
+              <Link to="/StartApp" class="btn btn-secondary"
+              onClick={(e) => this.handleSignUp(e)}>Sign Up</Link>
             </div>
           </form>
        </div>

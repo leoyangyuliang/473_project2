@@ -38,8 +38,8 @@ class App extends Component {
         <div>
 
           <GetUserName />
-          <button onClick={(e) =>
-            this.signout(e)}>Sign Out</button>
+          <button class="btn btn-secondary"
+          onClick={(e) => this.signout(e)}>Sign Out</button>
           <div>
               {this.renderRedirect()}
           </div>

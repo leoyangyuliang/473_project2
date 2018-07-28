@@ -16,7 +16,7 @@ class Main extends Component {
           <div>
           <h1 class="title">WeChat</h1>
           </div>
-          <div style={{background: 'black'}}>
+          <div class="navigationbar">
           <ul class="btn-group" style={{margin: 10}}>
             <Link class="btn btn-secondary" to="/">Home</Link>
             <Link class="btn btn-secondary" to="/StartApp">Start App</Link>
