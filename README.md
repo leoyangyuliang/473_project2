@@ -1,4 +1,4 @@
-          CPSC 473: Front-End Web Engineering - Summer 2018
+                    CPSC 473: Front-End Web Engineering - Summer 2018
 
           I.Our project:
 
@@ -87,4 +87,3 @@
             cd to your app directory
             Type commands:
                   npm start
-          
