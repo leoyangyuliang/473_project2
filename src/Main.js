@@ -7,7 +7,7 @@ import {
 import StartApp from './components/StartApp';
 import Home from './components/Home';
 import AboutUs from './components/AboutUs';
-
+import Signup from './components/Signup';
 class Main extends Component {
   render() {
     return (
@@ -26,6 +26,7 @@ class Main extends Component {
             <Route exact path="/" component={Home}/>
             <Route path="/StartApp" component={StartApp}/>
             <Route path="/AboutUs" component={AboutUs}/>
+            <Route path="/Signup" component={Signup}/>
           </div>
           </div>
         </div>

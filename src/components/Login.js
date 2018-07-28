@@ -21,20 +21,15 @@ class Login extends Component {
     this.state={
     username:'',
     password:'',
-    redirect: false
+    redirect: false,
+    signup: false
     }
+
+    this.handleSignUp = this.handleSignUp.bind(this);
   }
   handleSignUp(e){
-    e.preventDefault();
-    firebase.auth().createUserWithEmailAndPassword(this.state.username, this.state.password)
-    .then(function(firebaseUser) {
 
-    })
-    .catch(function(error) {
-      // Handle Errors here.
-      var errorMessage = error.message;
-      alert(errorMessage);
-    });
+    this.setState({signup:true});
   }
   handleLogIn(e) {
     firebase.auth().signInWithEmailAndPassword(this.state.username, this.state.password)
@@ -64,6 +59,11 @@ class Login extends Component {
        return <Redirect to='/StartApp' />
      }
    }
+   redirectToSignUp = () => {
+
+       return <Redirect to='/Signup' />
+
+   }
 
   render() {
     const divStyle = {
@@ -73,7 +73,7 @@ class Login extends Component {
         <div style={divStyle}>
           <form class="form-group">
             <label>
-              Username<br/>
+              Email<br/>
               <input type="email" placeholder="Enter email" value={this.state.username}
               onChange={(e) => this.handleChangeUsername(e)} />
               <br/>
@@ -87,6 +87,7 @@ class Login extends Component {
               onClick={(e) => this.handleLogIn(e)} >Log In</Link>
               <div>
                       {this.renderRedirect()}
+                      {this.state.signup && this.redirectToSignUp()}
               </div>
               <Link to="/StartApp" class="btn btn-secondary"
               onClick={(e) => this.handleSignUp(e)}>Sign Up</Link>
