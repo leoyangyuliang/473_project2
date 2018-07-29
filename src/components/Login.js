@@ -24,7 +24,6 @@ class Login extends Component {
     redirect: false,
     signup: false
     }
-
     this.handleSignUp = this.handleSignUp.bind(this);
   }
   handleSignUp(e){

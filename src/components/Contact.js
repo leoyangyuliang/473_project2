@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 
-class Post extends Component {
+class Contact extends Component {
   render() {
     return (
       <div>
-         Post will goes here
+        Contact will goes here
       </div>
     );
   }
  }
-export default Post;
+export default Contact;
