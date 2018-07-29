@@ -13,19 +13,43 @@ class Signup extends Component {
     gender:"M",
     redirect: false
     }
+    this.writeToDB = this.writeToDB.bind(this);
   }
+
+  componentWillMount(){
+  }
+
+  writeToDB(){
+    const firestore = firebase.firestore();
+    const settings = {/* your settings... */ timestampsInSnapshots: true};
+    firestore.settings(settings);
+    var db = firebase.firestore();
+    db.collection("users").doc(this.state.email).set({
+        name: this.state.name,
+        age:this.state.age,
+        gender:this.state.gender
+     })
+     .then(() => {
+        alert("Welcome to WeChat!!");
+        this.setState({redirect:true});
+     })
+     .catch(function(error) {
+         console.error("Error writing document: ", error);
+     });
+
+  }
+
   handleSignUp(e){
-    // e.preventDefault();
-    // firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-    // .then(function(firebaseUser) {
-    //   this.setState({redirect:true});
-    // })
-    // .catch(function(error) {
-    //   // Handle Errors here.
-    //   var errorMessage = error.message;
-    //   alert(errorMessage);
-    // });
-    console.log(this.state);
+     e.preventDefault();
+    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+    .then(() => {
+        this.writeToDB();
+    })
+    .catch(function(error) {
+      // Handle Errors here.
+      var errorMessage = error.message;
+      alert(errorMessage);
+    });
   }
 
   renderRedirect = () => {
@@ -73,7 +97,7 @@ class Signup extends Component {
 
             <br/>Username<br/>
 
-            <input type="email" placeholder="Enter Name" value={this.state.username}
+            <input type="text" placeholder="Enter Name" value={this.state.username}
             onChange={(e) => this.handleChangeUsername(e)} />
 
             <br/>Gender<br/>
