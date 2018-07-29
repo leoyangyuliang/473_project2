@@ -7,15 +7,7 @@ import {
 } from "react-router-dom";
 import Post from './Post';
 
-/*
-class Chat extends Component {
- render() {
-   return (
 
-   );
- }
-}
-*/
 class ChatRoom extends Component {
 
   constructor(props, context) {
