@@ -4,9 +4,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <h2>WeChat</h2>
-        <p>best hook up tool</p>
-        <p>--------ever</p>
+        
       </div>
     );
   }

@@ -125,6 +125,7 @@ h1, h2, p, ul, li {
 
 .navigationbar{
     background-image: url("./pics/appbackground.jpg");
+    font-size: 25px;
 }
 
 ul.header li {
@@ -158,4 +159,166 @@ ul.header li a {
 }
 .content li {
   margin-bottom: 10px;
+}
+
+
+
+
+
+
+@font-face {
+  font-family: 'airstreamregular';
+  font-style: normal;
+  font-weight: normal;
+  src: url('fonts/Airstream-webfont.eot');
+  src: url('fonts/Airstream-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/Airstream-webfont.woff') format('woff'), url('fonts/Airstream-webfont.ttf') format('truetype'), url('fonts/Airstream-webfont.svg#airstreamregular') format('svg');
+}
+
+@font-face {
+  font-family: 'lakeshore';
+  font-style: normal;
+  font-weight: normal;
+  src: url('fonts/LAKESHOR-webfont.eot');
+  src: url('fonts/LAKESHOR-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/LAKESHOR-webfont.woff') format('woff'), url('fonts/LAKESHOR-webfont.ttf') format('truetype'), url('fonts/LAKESHOR-webfont.svg#lakeshore') format('svg');
+}
+
+body {
+  background: rgb(16, 34, 46);
+  display: flex;
+  flex-direction: column;
+  font-size: 10px;
+}
+.button2{
+  position: relative;
+}
+.button1{
+  position: relative;
+}
+
+a[href="#"] {
+  text-decoration: none;
+}
+
+.detail-image {
+  width: 50%;
+}
+
+.detail-image-container {
+  align-items: center;
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+  margin-bottom: 100px;
+  margin-top: 100px;
+}
+
+.detail-image-frame {
+  position: relative;
+  text-align: center;
+  transition: transform 333ms cubic-bezier(1,.06,.28,1);
+}
+
+.detail-image-title {
+  bottom: -16px;
+  color: white;
+  font-family: airstreamregular;
+  font-size: 40px;
+  left: 4px;
+  position: absolute;
+  text-shadow: rgba(0, 0, 0, 0.9) 1px 2px 9px;
+}
+.hidden-detail .detail-image-container{
+  display: none;
+}
+.hidden-detail .thumbnail-list{
+  align-items: center;
+  flex-direction: column;
+
+}
+.hidden-detail .thumbnail-item{
+  max-width: 80%;
+}
+html, body {
+  height: 100%;
+}
+
+.is-tiny{
+  transform: scale(0.001);
+  transition: transform 0ms;
+}
+.logo-text {
+  background: white;
+  font-family: lakeshore;
+  font-size: 37px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.main-content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+.main-header {
+  flex: 0 1 auto;
+}
+
+.thumbnail-item {
+  border: 1px solid rgb(100%, 100%, 100%);
+  border: 1px solid rgba(100%, 100%, 100%, 0.8);
+  display: inline-block;
+  max-width: 120px;
+  min-width: 120px;
+  transition: transform 133ms ease-in-out;
+}
+
+.thumbnail-item:hover{
+  transform: scale(1.2);
+}
+.thumbnail-list {
+  display: flex;
+  flex: 0 1 auto;
+  justify-content: space-between;
+  list-style: none;
+  order: 2;
+  overflow-x: auto;
+  padding: 20px 0;
+  white-space: nowrap;
+}
+
+.thumbnail-image {
+  display: block;
+  width: 100%;
+}
+
+.thumbnail-title {
+  background: rgb(255, 255, 255);
+  color: rgb(45, 117, 67);
+  display: block;
+  font-size: 18px;
+  margin: 0;
+  padding: 4px 10px;
+}
+
+@media all and (min-width:768px) {
+  .main-content {
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .thumbnail-list {
+    flex-direction: row;
+    margin-left: 20px;
+    order: 0;
+    padding: 0 35px;
+    margin-top: 0px;
+    margin-bottom: 100px;
+  }
+  .thumbnail-item {
+    max-width: 260px;
+  }
+  /*style applies to the 2nd not the 1st one*/
+  .thumbnail-item{
+    margin-top: 20px;
+  }
 }

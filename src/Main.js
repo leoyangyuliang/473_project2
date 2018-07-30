@@ -14,10 +14,9 @@ class Main extends Component {
       <HashRouter>
         <div>
           <div>
-          <h1 class="title">WeChat</h1>
           </div>
           <div class="navigationbar">
-          <ul class="btn-group" style={{margin: 10}}>
+          <ul class="btn-group">
             <Link class="btn btn-secondary" to="/">Home</Link>
             <Link class="btn btn-secondary" to="/StartApp">Start App</Link>
             <Link class="btn btn-secondary" to="/AboutUs">About Us</Link>
