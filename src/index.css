@@ -4,6 +4,12 @@ body {
   margin: 0;
 }
 
+.friendList-button-group button{
+    width: 100%;
+    padding: 10px;
+    height: 100px;
+    font-size: 40px;
+}
 
 .rightchat-head{
  background-color: #6699cc;

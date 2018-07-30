@@ -40,24 +40,74 @@ class AddFriend extends Component {
               docRef.update({
                 friendList: [this.state.email]
               }).then(() => {
-                  alert("added");
-              }).catch(function(error) {
-                  alert("Error writing document: ", error);
-              });
+                  //add for another account
+                  var docRef1 = db.collection("users").doc(this.state.email);
+                  docRef1.get().then((doc1) => {
+                      if (doc1.exists) {
+                          if(doc1.data().friendList == null)
+                          {
+                            docRef1.update({
+                            friendList: [user.email]
+                          }).catch(function(error) {
+                              alert("Error writing document: ", error);
+                          });
+                          }else{
+                          const a = doc1.data().friendList;
+                          a.push(user.email);
+                            docRef1.update({
+                              friendList: a
+                            }).then(() => {
+                            }).catch(function(error) {
+                                alert("Error writing document: ", error);
+                            });
+                          }
+                      }
+                    }).catch(function(error){
+                    });
+                  //end of add another account
+                    }).catch(function(error) {
+                    alert("Error writing document: ", error);
+                    });
+                    alert("added");
             }
             else{
               //get the friendlist and add a new one to db
               const a = doc.data().friendList;
               var isFriend = false;
-              a.push(this.state.email);
               for(var i = 0; i < a.length; i++){
                 if(a[i] == this.state.email)
                     isFriend = true;
               }
+              a.push(this.state.email);
               if(!isFriend){
                 docRef.update({
                   friendList: a
                 }).then(() => {
+                  //add for another user
+                  var docRef1 = db.collection("users").doc(this.state.email);
+                  docRef1.get().then((doc1) => {
+                      if (doc.exists) {
+                          if(doc1.data().friendList == null)
+                          {
+                            docRef1.update({
+                            friendList: [user.email]
+                          }).catch(function(error) {
+                              alert("Error writing document: ", error);
+                          });
+                          }else{
+                          const a = doc1.data().friendList;
+                          a.push(user.email);
+                            docRef1.update({
+                              friendList: a
+                            }).then(() => {
+                            }).catch(function(error) {
+                                alert("Error writing document: ", error);
+                            });
+                          }
+                      }
+                    }).catch(function(error){
+                    });
+                    //end of add another account
                   alert("added");
                 }).catch(function(error) {
                     alert("Error writing document: ", error);

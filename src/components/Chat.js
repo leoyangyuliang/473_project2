@@ -21,7 +21,6 @@ class ChatRoom extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount')
     firebase.database().ref('message/').on('value', (snapshot) => {
       const currentMessages = snapshot.val()
       if (currentMessages != null) {
