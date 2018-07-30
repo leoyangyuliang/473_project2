@@ -24,6 +24,10 @@ body {
  flex-direction: column;
 }
 
+.searchFriends{
+  text-align: center;
+}
+
 .chat-footer{
  background-color: lightgreen;
  padding: .5em;
@@ -88,7 +92,7 @@ body {
 }
 
 .chatbox{
-  background-color: green;
+    background-color: green;
     padding:5px;
     height: 100%;
 }
@@ -101,6 +105,13 @@ h1, h2, p, ul, li {
   color: #FFFFC0;
   text-align: center;
 }
+.auth{
+  text-align: right;
+}
+.auth button {
+  margin-left: 50px;
+}
+
 
 #password{
   order: 1;

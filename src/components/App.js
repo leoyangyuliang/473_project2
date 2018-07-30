@@ -5,7 +5,7 @@ import {Redirect} from "react-router-dom";
 function GetUserName(){
   var user = firebase.auth().currentUser;
   if(user){
-  return user.email;
+  return  "Email: " + user.email;
   }
   return null;
 }
@@ -35,7 +35,7 @@ class App extends Component {
 
   render() {
     return (
-        <div>
+        <div class="auth">
 
           <GetUserName />
           <button class="btn btn-secondary"

@@ -19,9 +19,7 @@ function CheckAuthState(){
 class StartApp extends Component {
 
   render() {
-
     return (
-
       <div id="check">
       <CheckAuthState />
       </div>
