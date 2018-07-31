@@ -47,14 +47,16 @@ class ChatRoom extends Component {
         })
         console.log(this.state.atChatRoomID);
         if(this.state.atChatRoomID!=""){
-          var msg = db.collection("chatList").doc(this.state.atChatRoomID);
-          msg.get().then((doc) => {
+          var message = db.collection("chatList").doc(this.state.atChatRoomID);
+          message.get().then((doc) => {
             if(doc.data().msg!=null)
             {
               this.setState({
                 messages: doc.data().msg,
                 isAnyMsg: true
               });
+            }else{
+
             }
           })
         }
@@ -67,14 +69,16 @@ class ChatRoom extends Component {
       includeMetadataChanges: true
     }, (doc) => {
       if(this.state.atChatRoomID!=""){
-        var msg = db.collection("chatList").doc(this.state.atChatRoomID);
-        msg.get().then((doc) => {
+        var message = db.collection("chatList").doc(this.state.atChatRoomID);
+        message.get().then((doc) => {
           if(doc.data().msg!=null)
           {
             this.setState({
               messages: doc.data().msg,
               isAnyMsg: true
             });
+          }else{
+
           }
         })
       }
@@ -185,19 +189,19 @@ class ChatRoom extends Component {
                 {this.state.isAnyMsg && (
                   this.state.messages.map(msg=>{
                     var user = firebase.auth().currentUser;
-                    if(msg.name==user.emal)
-                      msg.name= "right-message"
+                    if(msg.sender==user.email)
+                      msg.sender= "right-message"
                     else {
-                      msg.name= "left-message"
+                      msg.sender= "left-message"
                     }
                   })
                 ) &&
                 (
                   this.state.messages.map(
-                    msg => <div class={msg.name}>
+                    msg => <div class={msg.sender}>
                     {msg.text} </div>)
                 )}
-                <div class="left-message">{this.state.message}</div>
+              
             </div>
 
             <div class="chat-footer">
