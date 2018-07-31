@@ -20,10 +20,10 @@ class ChatNavigation extends Component {
           <div class="left-container">
             <div class="navigationbar-chat">
               <ul class="btn-group" >
-                <Link class="btn btn-secondary" to="/StartApp/Chat">Chat</Link>
-                <Link class="btn btn-secondary" to="/StartApp/Contact">Contact</Link>
-                <Link class="btn btn-secondary" to="/StartApp/Post">Posts</Link>
-                <Link class="btn btn-secondary" to="/StartApp/AddFriend">Add Friends</Link>
+                <Link class="btn-sm btn-secondary" to="/StartApp/Chat">Chat</Link>
+                <Link class="btn-sm btn-secondary" to="/StartApp/Contact">Contact</Link>
+                <Link class="btn-sm btn-secondary" to="/StartApp/Post">Posts</Link>
+                <Link class="btn-sm btn-secondary" to="/StartApp/AddFriend">Add Friends</Link>
               </ul>
             </div>
           <div class="chatbox">
