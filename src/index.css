@@ -5,10 +5,11 @@ body {
 }
 
 .friendList-button-group button{
-    width: 100%;
-    padding: 10px;
-    height: 100px;
-    font-size: 40px;
+    width:100%;
+    padding: 0px;
+    height: 40px;
+    font-size: 20px;
+    
 }
 
 .rightchat-head{
@@ -34,6 +35,14 @@ body {
   text-align: center;
 }
 
+h1 {
+  color: #20c997;
+
+}
+
+label{
+  color: #20c997; 
+}
 .chat-footer{
  background-color: lightgreen;
  padding: .5em;
@@ -77,7 +86,7 @@ body {
 
 .right-container{
   padding: 20px;
-  background-color:blue;
+  background-color:white;
   height: 800px;
   align-self: flex-end;
   display:flex;
@@ -89,7 +98,7 @@ body {
 .left-container{
   padding: 20px;
   width: wrap;
-  background-color: red;
+  background-color:#20c997;
   height: 800px;
   align-self: flex-start;
   display:flex;
@@ -98,7 +107,7 @@ body {
 }
 
 .chatbox{
-    background-color: green;
+    background-color:#20c997;
     padding:5px;
     height: 100%;
 }
@@ -108,12 +117,14 @@ h1, h2, p, ul, li {
 }
 
 .title{
-  color: #FFFFC0;
+  color:#FFFFC0;
   text-align: center;
 }
+
 .auth{
   text-align: right;
 }
+
 .auth button {
   margin-left: 50px;
 }
@@ -133,6 +144,7 @@ ul.header li {
   list-style-type: none;
   margin: 0;
 }
+
 ul.header {
   background-color: #111;
   padding: 0;
@@ -162,10 +174,6 @@ ul.header li a {
 }
 
 
-
-
-
-
 @font-face {
   font-family: 'airstreamregular';
   font-style: normal;
@@ -182,27 +190,6 @@ ul.header li a {
   src: url('fonts/LAKESHOR-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/LAKESHOR-webfont.woff') format('woff'), url('fonts/LAKESHOR-webfont.ttf') format('truetype'), url('fonts/LAKESHOR-webfont.svg#lakeshore') format('svg');
 }
 
-body {
-  background: rgb(16, 34, 46);
-  display: flex;
-  flex-direction: column;
-  font-size: 10px;
-}
-.button2{
-  position: relative;
-}
-.button1{
-  position: relative;
-}
-
-a[href="#"] {
-  text-decoration: none;
-}
-
-.detail-image {
-  width: 50%;
-}
-
 .detail-image-container {
   align-items: center;
   display: flex;
@@ -212,80 +199,12 @@ a[href="#"] {
   margin-top: 100px;
 }
 
-.detail-image-frame {
-  position: relative;
-  text-align: center;
-  transition: transform 333ms cubic-bezier(1,.06,.28,1);
-}
-
-.detail-image-title {
-  bottom: -16px;
-  color: white;
-  font-family: airstreamregular;
-  font-size: 40px;
-  left: 4px;
-  position: absolute;
-  text-shadow: rgba(0, 0, 0, 0.9) 1px 2px 9px;
-}
-.hidden-detail .detail-image-container{
-  display: none;
-}
-.hidden-detail .thumbnail-list{
-  align-items: center;
-  flex-direction: column;
-
-}
-.hidden-detail .thumbnail-item{
-  max-width: 80%;
-}
-html, body {
-  height: 100%;
-}
-
-.is-tiny{
-  transform: scale(0.001);
-  transition: transform 0ms;
-}
-.logo-text {
-  background: white;
-  font-family: lakeshore;
-  font-size: 37px;
-  text-align: center;
-  text-transform: uppercase;
-}
-
 .main-content {
   display: flex;
   flex: 1 1 auto;
-  flex-direction: column;
 }
 
-.main-header {
-  flex: 0 1 auto;
-}
 
-.thumbnail-item {
-  border: 1px solid rgb(100%, 100%, 100%);
-  border: 1px solid rgba(100%, 100%, 100%, 0.8);
-  display: inline-block;
-  max-width: 120px;
-  min-width: 120px;
-  transition: transform 133ms ease-in-out;
-}
-
-.thumbnail-item:hover{
-  transform: scale(1.2);
-}
-.thumbnail-list {
-  display: flex;
-  flex: 0 1 auto;
-  justify-content: space-between;
-  list-style: none;
-  order: 2;
-  overflow-x: auto;
-  padding: 20px 0;
-  white-space: nowrap;
-}
 
 .thumbnail-image {
   display: block;
@@ -295,30 +214,17 @@ html, body {
 .thumbnail-title {
   background: rgb(255, 255, 255);
   color: rgb(45, 117, 67);
-  display: block;
+  display:inline;
   font-size: 18px;
   margin: 0;
   padding: 4px 10px;
 }
 
-@media all and (min-width:768px) {
-  .main-content {
-    flex-direction: column;
-    overflow: hidden;
-  }
-  .thumbnail-list {
-    flex-direction: row;
-    margin-left: 20px;
-    order: 0;
-    padding: 0 35px;
-    margin-top: 0px;
-    margin-bottom: 100px;
-  }
-  .thumbnail-item {
-    max-width: 260px;
-  }
-  /*style applies to the 2nd not the 1st one*/
-  .thumbnail-item{
-    margin-top: 20px;
-  }
+ul {
+  -moz-column-count: 5;
+  -moz-column-gap: 20px;
+  -webkit-column-count: 5;
+  -webkit-column-gap: 20px;
+  column-count: 5;
+  column-gap: 20px;
 }
