@@ -18,7 +18,7 @@ class ChatRoom extends Component {
       message: '',
       time: '',
       messages: [],
-      atChatRoomID: '',
+      atChatRoomID: 'chatroom',
       isAnyMsg: false
     }
 
@@ -47,6 +47,7 @@ class ChatRoom extends Component {
         })
         console.log(this.state.atChatRoomID);
         if(this.state.atChatRoomID!=""){
+          //first argument to be of type string
           var message = db.collection("chatList").doc(this.state.atChatRoomID);
           message.get().then((doc) => {
             if(doc.data().msg!=null)
@@ -90,45 +91,46 @@ class ChatRoom extends Component {
   }
 
   componentDidMount(){
-    var user = firebase.auth().currentUser;
-    var db = firebase.firestore();
-    var docRef = db.collection("users").doc(user.email);
-    if(this.state.atChatRoomID!=""){
-        console.log("messages" + this.state.messages);
-      var chat = db.collection("chatList").doc(this.state.atChatRoomID);
-      docRef.onSnapshot({
-          // Listen for document metadata changes
-          includeMetadataChanges: true
-      }, (doc) => {
-          console.log("db changed");
-          docRef.get().then((doc) => {
-            this.setState({isAnyMsg: false});
-            if(doc.exists){
-              this.setState({
-                messages: doc.data().msg,
-                isAnyMsg: true
-              });
-            }
-          }).catch(function(error){
-
-          });
-      });
-      docRef.get().then((doc) => {
-        if(doc.exists){
-          this.setState({isAnyMsg: false});
-          this.setState({
-            messages: doc.data().msg,
-            isAnyMsg: true
-          });
-        }
-      }).catch(function(error){
-
-      });
-    }
+    // var user = firebase.auth().currentUser;
+    // var db = firebase.firestore();
+    // var docRef = db.collection("users").doc(user.email);
+    // if(this.state.atChatRoomID!=""){
+    //     console.log("messages" + this.state.messages);
+    //   var chat = db.collection("chatList").doc(this.state.atChatRoomID);
+    //   docRef.onSnapshot({
+    //       // Listen for document metadata changes
+    //       includeMetadataChanges: true
+    //   }, (doc) => {
+    //       console.log("db changed");
+    //       docRef.get().then((doc) => {
+    //         this.setState({isAnyMsg: false});
+    //         if(doc.exists){
+    //           this.setState({
+    //             messages: doc.data().msg,
+    //             isAnyMsg: true
+    //           });
+    //         }
+    //       }).catch(function(error){
+    //
+    //       });
+    //   });
+    //   docRef.get().then((doc) => {
+    //     if(doc.exists){
+    //       this.setState({isAnyMsg: false});
+    //       this.setState({
+    //         messages: doc.data().msg,
+    //         isAnyMsg: true
+    //       });
+    //     }
+    //   }).catch(function(error){
+    //
+    //   });
+    // }
 
   }
 
   updateMessage(event) {
+    event.preventDefault();
     this.setState({
       message: event.target.value
     })
@@ -201,7 +203,7 @@ class ChatRoom extends Component {
                     msg => <div class={msg.sender}>
                     {msg.text} </div>)
                 )}
-              
+
             </div>
 
             <div class="chat-footer">
