@@ -19,16 +19,15 @@ class ChatRoom extends Component {
       time: '',
       messages: [],
       atChatRoomID: 'chatroom',
-      isAnyMsg: false
+      isAnyMsg: false,
+      newMessages: []
     }
 
-    this.updateMessage = this.updateMessage.bind(this)
-    this.sendMessage = this.sendMessage.bind(this)
+    this.updateMessage = this.updateMessage.bind(this);
+    this.sendMessage = this.sendMessage.bind(this);
   }
 
-
-
-  componentWillMount() {
+  componentWillMount(){
     var user = firebase.auth().currentUser;
     var db = firebase.firestore();
     var docRef = db.collection("users").doc(user.email);
@@ -43,41 +42,83 @@ class ChatRoom extends Component {
               atChatRoomID: doc.data().atChatRoomID,
               isAnyMsg:false
             });
+
           }
-        })
+        });
+        //update message after change room
         console.log(this.state.atChatRoomID);
-        if(this.state.atChatRoomID!=""){
+        if(this.state.atChatRoomID!==undefined){
           //first argument to be of type string
           var message = db.collection("chatList").doc(this.state.atChatRoomID);
-          message.get().then((doc) => {
-            if(doc.data().msg!=null)
+          message.get().then((doc1) => {
+            console.log(doc1.data());
+            if(doc1.data()!==undefined)
             {
               this.setState({
-                messages: doc.data().msg,
+                messages: doc1.data().msg,
                 isAnyMsg: true
               });
+              //update the new messages
+              this.setState({newMessages:[]});
+              this.state.messages.map((msg)=>{
+                var obj ={
+                  sender: msg.sender,
+                  text: msg.text,
+                  time: msg.time,
+                  class: ''
+                }
+                if(msg.sender==user.email){
+                  obj.class = "right-message"
+                }
+                else {
+                  obj.class= "left-message"
+                }
+                var a = this.state.newMessages;
+                a.push(obj);
+                this.setState({newMessages: a})
+              })
             }else{
 
             }
           })
         }
+        //end update message after change room
     });
-
-
+    //listen for group msg change
     var chatList = db.collection("chatList");
     chatList.onSnapshot({
       // Listen for document metadata changes
       includeMetadataChanges: true
     }, (doc) => {
-      if(this.state.atChatRoomID!=""){
+      if(this.state.atChatRoomID!==undefined){
         var message = db.collection("chatList").doc(this.state.atChatRoomID);
         message.get().then((doc) => {
-          if(doc.data().msg!=null)
+          console.log(doc.data());
+          if(doc.data()!==undefined)
           {
             this.setState({
               messages: doc.data().msg,
               isAnyMsg: true
             });
+            //update the new messages
+            this.setState({newMessages:[]});
+            this.state.messages.map((msg)=>{
+              var obj ={
+                sender: msg.sender,
+                text: msg.text,
+                time: msg.time,
+                class: ''
+              }
+              if(msg.sender==user.email){
+                obj.class = "right-message"
+              }
+              else {
+                obj.class= "left-message"
+              }
+              var a = this.state.newMessages;
+              a.push(obj);
+              this.setState({newMessages: a})
+            })
           }else{
 
           }
@@ -88,7 +129,29 @@ class ChatRoom extends Component {
         console.log("error123123");
     });
 
+    /*(
+      this.state.messages.map(msg=>{
+        var user = firebase.auth().currentUser;
+        var obj ={
+          sender: msg.sender,
+          text: msg.text,
+          time: msg.time,
+          class: ''
+        }
+        if(msg.sender==user.email){
+          obj.class = "right-message"
+        }
+        else {
+          obj.class= "left-message"
+        }
+        var a = this.state.newMessages;
+        a.push(obj);
+        this.setState({newMessages: a})
+      })
+    ) */
   }
+
+
 
   componentDidMount(){
     // var user = firebase.auth().currentUser;
@@ -137,6 +200,9 @@ class ChatRoom extends Component {
   }
 
   sendMessage(e) {
+    this.setState({
+      message: document.getElementById("inputMessage").value
+    })
     var user = firebase.auth().currentUser;
     var db = firebase.firestore();
     var docRef = db.collection("chatList").doc(this.state.atChatRoomID);
@@ -176,7 +242,7 @@ class ChatRoom extends Component {
             }
       }
     });
-
+document.getElementById("inputMessage").value = "";
   }
 
 
@@ -188,26 +254,17 @@ class ChatRoom extends Component {
             <div class="rightchat-head">Chat Room: {this.state.atChatRoomID}</div>
 
             <div class="chat-body">
-                {this.state.isAnyMsg && (
-                  this.state.messages.map(msg=>{
-                    var user = firebase.auth().currentUser;
-                    if(msg.sender==user.email)
-                      msg.sender= "right-message"
-                    else {
-                      msg.sender= "left-message"
-                    }
-                  })
-                ) &&
+                {this.state.isAnyMsg &&
                 (
-                  this.state.messages.map(
-                    msg => <div class={msg.sender}>
-                    {msg.text} </div>)
+                  this.state.newMessages.map(
+                    msg => <div class={msg.class}>
+                    <div class="sender">{msg.sender}</div>{msg.text} </div>)
                 )}
 
             </div>
 
             <div class="chat-footer">
-                 <input onChange={this.updateMessage} type="text"
+                 <input id="inputMessage" type="text"
                  placeholder="Type your message…" autofocus />
               <br />
               <button onClick={(e) => this.sendMessage(e)} >
