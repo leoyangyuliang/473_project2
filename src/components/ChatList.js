@@ -3,15 +3,13 @@ import * as firebase from 'firebase';
 import {Redirect} from "react-router-dom";
 import Chat from './Chat';
 
-
 class ChatList extends Component {
   constructor(props){
     super(props);
     this.state={
       chatList: [],
       isAnyChat: false,
-      atChatRoomID: '',
-      
+      atChatRoomID: ''
     }
   }
 
@@ -39,6 +37,10 @@ class ChatList extends Component {
         console.log("Error getting document:", error);
 
     });
+
+    //find out all the chatroom name by using chatroom ID
+
+
   }
 
   createChatRoom(chatRoomID){
@@ -62,12 +64,13 @@ class ChatList extends Component {
   render() {
     return (
       <div>
+      <h3>Chat Rooms</h3>
       {this.state.isAnyChat &&
         (
           this.state.chatList.map(
             chat => <div class="chatList-button-group">
-            <button onClick={() => this.createChatRoom(chat)} >
-            {chat} </button></div>)
+            <button onClick={() => this.createChatRoom(chat.chatRoomID)} >
+            {chat.chatRoomName} </button></div>)
         )}
 
 

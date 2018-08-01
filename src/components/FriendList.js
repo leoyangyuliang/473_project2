@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import * as firebase from 'firebase';
+import PopUpWindow from './PopUpWindow';
+import Popup from 'react-popup';
 
 
 class friendList extends Component {
@@ -9,7 +11,9 @@ class friendList extends Component {
     this.state={
       friendList: [],
       isAnyFriend: false,
-      chatRoomId: ''
+      chatRoomId: '',
+      email: '',
+      chatRoomName: ''
     }
   }
   componentWillMount(){
@@ -26,7 +30,9 @@ class friendList extends Component {
             this.setState({
               friendList: doc.data().friendList,
               isAnyFriend: true,
-              chatRoomID: ''
+              chatRoomID: '',
+              isOpen: false,
+              email: ''
             });
           }
         } else {
@@ -38,14 +44,18 @@ class friendList extends Component {
     });
   }
 
-  createChatRoom(email){
+  createChatRoom(groupName){
+    const email = this.state.email;
     //create chatroom with self-generating ID
     var db = firebase.firestore();
     var user = firebase.auth().currentUser;
+    console.log(this.state.chatRoomName);
     const object = {
+        chatRoomName: groupName,
         msg:[],
         users:[email,user.email]
     };
+
     db.collection("chatList").add(object)
     .then((docRef) => {
         this.setState({chatRoomID: docRef.id});
@@ -57,8 +67,12 @@ class friendList extends Component {
                 if(doc.data().chatList == null)
                 {
                   //create a new list to firebase
+                  const o = {
+                    chatRoomName: groupName,
+                    chatRoomID: this.state.chatRoomID
+                  }
                   docRef.update({
-                    chatList: [this.state.chatRoomID]
+                    chatList: [o]
                   }).then(() => {
                       //add for another account
                       var docRef1 = db.collection("users").doc(email);
@@ -66,14 +80,22 @@ class friendList extends Component {
                           if (doc1.exists) {
                               if(doc1.data().chatList == null)
                               {
+                                const o = {
+                                  chatRoomName: groupName,
+                                  chatRoomID: this.state.chatRoomID
+                                }
                                 docRef1.update({
-                                  chatList: [this.state.chatRoomID]
+                                  chatList: [o]
                               }).catch(function(error) {
                                   alert("Error writing document: ", error);
                               });
                               }else{
+                                const o = {
+                                  chatRoomName: groupName,
+                                  chatRoomID: this.state.chatRoomID
+                                }
                               const a = doc1.data().chatList;
-                              a.push(this.state.chatRoomID);
+                              a.push(o);
                                 docRef1.update({
                                   chatList: a
                                 }).then(() => {
@@ -98,7 +120,11 @@ class friendList extends Component {
                     if(a[i] == this.state.chatRoomID)
                         isFriend = true;
                   }
-                  a.push(this.state.chatRoomID);
+                  const o = {
+                    chatRoomName: groupName,
+                    chatRoomID: this.state.chatRoomID
+                  }
+                  a.push(o);
                   if(!isFriend){
                     docRef.update({
                       chatList: a
@@ -109,14 +135,22 @@ class friendList extends Component {
                           if (doc.exists) {
                               if(doc1.data().chatList == null)
                               {
+                                const o = {
+                                  chatRoomName: groupName,
+                                  chatRoomID: this.state.chatRoomID
+                                }
                                 docRef1.update({
-                                chatList: [this.state.chatRoomID]
+                                chatList: [o]
                               }).catch(function(error) {
                                   alert("Error writing document: ", error);
                               });
                               }else{
                               const a = doc1.data().chatList;
-                              a.push(this.state.chatRoomID);
+                              const o = {
+                                chatRoomName: groupName,
+                                chatRoomID: this.state.chatRoomID
+                              }
+                              a.push(o);
                                 docRef1.update({
                                   chatList: a
                                 }).then(() => {
@@ -150,19 +184,47 @@ class friendList extends Component {
         console.error("Error adding document: ", error);
     });
 
-
-
-
   }
 
+  togglePopUpWindowShow(email){
+    this.setState({
+      isOpen:true,
+      email: email
+    })
+
+  }
+  myCallback = (dataFromChild) => {
+        const groupName = window.groupName;
+        this.setState({
+          chatRoomName: groupName,
+          isOpen: false
+        });
+        if(groupName!==undefined && groupName!==""){
+          this.createChatRoom(groupName);
+        }
+  }
+  togglePopUpWindow = () => {
+    this.setState({isOpen:false})
+  }
   render() {
     return (
       <div class="friendList-button-group">
+
         {this.state.isAnyFriend &&
           (
             this.state.friendList.map(
-              friend => <div><button onClick={() => this.createChatRoom(friend)}>
-              {friend} </button></div>)
+              friend => <div>
+                {friend}:
+                <button onClick={() => this.togglePopUpWindowShow(friend)}>
+                Chat with this User</button>
+                { this.state.isOpen &&
+                <PopUpWindow show={this.state.isOpen}
+                  callback={this.myCallback}
+                  onClose={this.togglePopUpWindow}
+                  text="group name:">
+                </PopUpWindow>
+                }
+              </div>)
           )}
       </div>
     );

@@ -20,7 +20,8 @@ class ChatRoom extends Component {
       messages: [],
       atChatRoomID: 'chatroom',
       isAnyMsg: false,
-      newMessages: []
+      newMessages: [],
+      chatRoomName: ''
     }
 
     this.updateMessage = this.updateMessage.bind(this);
@@ -55,6 +56,7 @@ class ChatRoom extends Component {
             if(doc1.data()!==undefined)
             {
               this.setState({
+                chatRoomName: doc1.data().chatRoomName,
                 messages: doc1.data().msg,
                 isAnyMsg: true
               });
@@ -251,7 +253,9 @@ document.getElementById("inputMessage").value = "";
     return (
       <div class ="chat-area">
           <div class="right-container">
-            <div class="rightchat-head">Chat Room: {this.state.atChatRoomID}</div>
+            <div class="rightchat-head">Chat Room: {this.state.chatRoomName}
+              <button class="addPeopleToChat">+</button>
+            </div>
 
             <div class="chat-body">
                 {this.state.isAnyMsg &&
