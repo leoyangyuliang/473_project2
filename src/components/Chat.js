@@ -19,7 +19,8 @@ class ChatRoom extends Component {
       time: '',
       messages: [],
       atChatRoomID: 'chatroom',
-      isAnyMsg: false
+      isAnyMsg: false,
+      newMessages: []
     }
 
     this.updateMessage = this.updateMessage.bind(this);
@@ -57,6 +58,25 @@ class ChatRoom extends Component {
                 messages: doc1.data().msg,
                 isAnyMsg: true
               });
+              //update the new messages
+              this.setState({newMessages:[]});
+              this.state.messages.map((msg)=>{
+                var obj ={
+                  sender: msg.sender,
+                  text: msg.text,
+                  time: msg.time,
+                  class: ''
+                }
+                if(msg.sender==user.email){
+                  obj.class = "right-message"
+                }
+                else {
+                  obj.class= "left-message"
+                }
+                var a = this.state.newMessages;
+                a.push(obj);
+                this.setState({newMessages: a})
+              })
             }else{
 
             }
@@ -80,6 +100,25 @@ class ChatRoom extends Component {
               messages: doc.data().msg,
               isAnyMsg: true
             });
+            //update the new messages
+            this.setState({newMessages:[]});
+            this.state.messages.map((msg)=>{
+              var obj ={
+                sender: msg.sender,
+                text: msg.text,
+                time: msg.time,
+                class: ''
+              }
+              if(msg.sender==user.email){
+                obj.class = "right-message"
+              }
+              else {
+                obj.class= "left-message"
+              }
+              var a = this.state.newMessages;
+              a.push(obj);
+              this.setState({newMessages: a})
+            })
           }else{
 
           }
@@ -90,12 +129,29 @@ class ChatRoom extends Component {
         console.log("error123123");
     });
 
+    /*(
+      this.state.messages.map(msg=>{
+        var user = firebase.auth().currentUser;
+        var obj ={
+          sender: msg.sender,
+          text: msg.text,
+          time: msg.time,
+          class: ''
+        }
+        if(msg.sender==user.email){
+          obj.class = "right-message"
+        }
+        else {
+          obj.class= "left-message"
+        }
+        var a = this.state.newMessages;
+        a.push(obj);
+        this.setState({newMessages: a})
+      })
+    ) */
   }
 
-  componentDidMount() {
 
-
-  }
 
   componentDidMount(){
     // var user = firebase.auth().currentUser;
@@ -198,20 +254,11 @@ document.getElementById("inputMessage").value = "";
             <div class="rightchat-head">Chat Room: {this.state.atChatRoomID}</div>
 
             <div class="chat-body">
-                {this.state.isAnyMsg && (
-                  this.state.messages.map(msg=>{
-                    var user = firebase.auth().currentUser;
-                    if(msg.sender==user.email)
-                      msg.sender= "right-message"
-                    else {
-                      msg.sender= "left-message"
-                    }
-                  })
-                ) &&
+                {this.state.isAnyMsg &&
                 (
-                  this.state.messages.map(
-                    msg => <div class={msg.sender}>
-                    {msg.text} </div>)
+                  this.state.newMessages.map(
+                    msg => <div class={msg.class}>
+                    <div class="sender">{msg.sender}</div>{msg.text} </div>)
                 )}
 
             </div>
