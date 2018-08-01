@@ -249,7 +249,7 @@ document.getElementById("inputMessage").value = "";
   render() {
 
     return (
-      <div>
+      <div class ="chat-area">
           <div class="right-container">
             <div class="rightchat-head">Chat Room: {this.state.atChatRoomID}</div>
 
@@ -268,7 +268,7 @@ document.getElementById("inputMessage").value = "";
                  placeholder="Type your message…" autofocus />
               <br />
               <button onClick={(e) => this.sendMessage(e)} >
-              Send message</button>
+              Send Message</button>
             </div>
           </div>
       </div>

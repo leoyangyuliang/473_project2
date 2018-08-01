@@ -162,7 +162,7 @@ class AddFriend extends Component {
   render() {
     return (
       <div class="searchFriends">
-        <h1>Search Friends</h1>
+        <h1>SEACH FOR FRIENDS</h1>
         <form>
           <div class="form-group">
             <label for="exampleInputEmail1">Email</label>

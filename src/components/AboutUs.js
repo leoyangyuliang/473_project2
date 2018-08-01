@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 
 class AboutUs extends Component {
   render() {
@@ -6,11 +6,6 @@ class AboutUs extends Component {
       <div>
         <div class ="container">
           <div class ="main-content">
-
-            <div class= "detail-image-container">
-              <img class ="detail-image" data-image-role ="target" src ="images/otter1.jpg" atl =""></img>
-              <span class="detail-image-title" data-image-role="title">Kevin Kheradvar</span>
-            </div>
 
             <ul class="thumnail-list">
 
@@ -57,6 +52,7 @@ class AboutUs extends Component {
         </div>
   
       </div>
+
     );
   }
 }
