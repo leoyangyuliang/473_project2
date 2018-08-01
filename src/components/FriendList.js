@@ -43,6 +43,7 @@ class friendList extends Component {
     var db = firebase.firestore();
     var user = firebase.auth().currentUser;
     const object = {
+        msg:[],
         users:[email,user.email]
     };
     db.collection("chatList").add(object)
@@ -66,7 +67,7 @@ class friendList extends Component {
                               if(doc1.data().chatList == null)
                               {
                                 docRef1.update({
-                                chatList: [this.state.chatRoomID]
+                                  chatList: [this.state.chatRoomID]
                               }).catch(function(error) {
                                   alert("Error writing document: ", error);
                               });

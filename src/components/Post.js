@@ -5,7 +5,7 @@ class Post extends Component {
   render() {
     return (
       <div>
-         Post will goes here
+         Post will goes here123123123
       </div>
     );
   }

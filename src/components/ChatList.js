@@ -10,7 +10,8 @@ class ChatList extends Component {
     this.state={
       chatList: [],
       isAnyChat: false,
-      atChatRoomID: ''
+      atChatRoomID: '',
+      
     }
   }
 
