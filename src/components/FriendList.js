@@ -214,10 +214,10 @@ class friendList extends Component {
           (
             this.state.friendList.map(
               friend => <div>
-
+                {friend}:
                 <button onClick={() => this.togglePopUpWindowShow(friend)}>
                 Chat Now</button>
-                {friend}:
+
 
                 { this.state.isOpen &&
                 <PopUpWindow show={this.state.isOpen}
