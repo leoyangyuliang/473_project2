@@ -16,6 +16,7 @@ body {
     margin: auto;
     float:right;
 }
+
 .addPeopleToChat{
     float:right;
 }
@@ -38,6 +39,8 @@ body {
   bottom: 25%;
   margin: auto;
   background: white;
+  border-radius: 12px;
+  text-align: center;
 }
 .PopUpWindow-header{
   color:white;
@@ -46,10 +49,12 @@ body {
 .pop-close-btn{
   display: flex;
   justify-content: center;
+  float:center;
 }
 .pop-create-btn{
   display: flex;
   justify-content: center;
+  float: center;
 }
 .chatList-button-group button{
   width:100%;

@@ -215,7 +215,7 @@ class friendList extends Component {
             this.state.friendList.map(
               friend => <div>
                 {friend}:
-                <button onClick={() => this.togglePopUpWindowShow(friend)}>
+                <button  onClick={() => this.togglePopUpWindowShow(friend)}>
                 Chat Now</button>
 
 
@@ -223,7 +223,7 @@ class friendList extends Component {
                 <PopUpWindow show={this.state.isOpen}
                   callback={this.myCallback}
                   onClose={this.togglePopUpWindow}
-                  text="Enter a Room Name:">
+                  text="Enter a Room Name">
                 </PopUpWindow>
                 }
               </div>)

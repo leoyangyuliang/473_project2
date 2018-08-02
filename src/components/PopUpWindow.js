@@ -11,9 +11,10 @@ class PopUpWindow extends React.Component {
       <div className='popup'>
         <div className='popup_inner'>
           <h1>{this.props.text}</h1>
-          <input type="text" id="chatRoomName" class="form-control" placeholder="Enter Chat Room Name"
+          <input type="text" id="chatRoomName" class="form-control" placeholder="...Enter Name Of The Room"
           onChange={(e) => this.updateGroupName(e)}  />
-        <button class="pop-create-btn" onClick={this.props.callback}>Create Chat</button>
+        <button class="pop-create-btn" onClick={this.props.callback}>Create A Room</button>
+        <br></br>
         <button class="pop-close-btn" onClick={this.props.onClose}>Close</button>
         </div>
       </div>
