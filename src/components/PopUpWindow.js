@@ -13,8 +13,8 @@ class PopUpWindow extends React.Component {
           <h1>{this.props.text}</h1>
           <input type="text" id="chatRoomName" class="form-control" placeholder="Enter Chat Room Name"
           onChange={(e) => this.updateGroupName(e)}  />
-        <button onClick={this.props.onClose}>Close</button>
-        <button onClick={this.props.callback}>Create Chat</button>
+        <button class="pop-close-btn" onClick={this.props.onClose}>Close</button>
+        <button class="pop-create-btn" onClick={this.props.callback}>Create Chat</button>
         </div>
       </div>
     );
