@@ -16,7 +16,9 @@ body {
     margin: auto;
     float:right;
 }
-
+.result-search{
+  color:black;
+}
 .addPeopleToChat{
     float:right;
 }

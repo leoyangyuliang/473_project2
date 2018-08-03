@@ -284,7 +284,6 @@ class ChatRoom extends Component {
           if(doc.exists)
           {
               var users = doc1.data().users;
-              alert(users);
               users.push(userToAdd);
               ref1.update({
                 users: users

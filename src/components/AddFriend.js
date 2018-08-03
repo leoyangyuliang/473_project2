@@ -174,7 +174,7 @@ class AddFriend extends Component {
             onClick={(e) => this.handleSearch(e)}>Search</button>
 
             {this.state.isResultFound &&(
-              <div>
+              <div class="result-search">
                 <br />
                 <p>User found! Is this who you are looking for?</p>
                 Name: {this.state.result.name} <br />
