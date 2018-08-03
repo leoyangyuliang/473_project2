@@ -216,7 +216,7 @@ class friendList extends Component {
               friend => <div>
                 {friend}:
                 <button onClick={() => this.togglePopUpWindowShow(friend)}>
-                Chat with this User</button>
+                Chat</button>
                 { this.state.isOpen &&
                 <PopUpWindow show={this.state.isOpen}
                   callback={this.myCallback}

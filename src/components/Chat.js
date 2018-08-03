@@ -288,6 +288,7 @@ class ChatRoom extends Component {
               ref1.update({
                 users: users
               }).then(()=>{
+            
                 //add groupList to the user need to be added
                 var docRef1 = db.collection("users").doc(userToAdd);
                 docRef1.get().then((doc1) => {
