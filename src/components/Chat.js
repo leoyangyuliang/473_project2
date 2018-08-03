@@ -6,8 +6,7 @@ import {
   HashRouter
 } from "react-router-dom";
 import Post from './Post';
-
-
+import PopUpWindowAddUser from "./PopUpWindowAddUser";
 
 
 class ChatRoom extends Component {
@@ -21,7 +20,9 @@ class ChatRoom extends Component {
       atChatRoomID: 'chatroom',
       isAnyMsg: false,
       newMessages: [],
-      chatRoomName: ''
+      chatRoomName: '',
+      isOpen: false,
+      userToAdd: ''
     }
 
     this.updateMessage = this.updateMessage.bind(this);
@@ -244,8 +245,100 @@ class ChatRoom extends Component {
             }
       }
     });
-document.getElementById("inputMessage").value = "";
+    document.getElementById("inputMessage").value = "";
   }
+
+  togglePopUpWindowShow(){
+    this.setState({
+      isOpen:true
+    })
+  }
+
+  togglePopUpWindow = () => {
+    this.setState({isOpen:false})
+  }
+
+  myCallback = (dataFromChild) => {
+        const userToAdd = window.username;
+        window.username = "";+
+        this.setState({
+          userToAdd: userToAdd,
+          isOpen: false
+        });
+        if(userToAdd!==undefined && userToAdd!==""){
+          this.addUserToGroupChat(userToAdd);
+        }
+  }
+
+
+  addUserToGroupChat(userToAdd){
+
+    var db = firebase.firestore();
+    var ref = db.collection("users").doc(userToAdd)
+    ref.get().then((doc)=>{
+      if(doc.exists)
+      {
+        var ref1 = db.collection("chatList").doc(this.state.atChatRoomID)
+        ref1.get()
+        .then((doc1)=>{
+          if(doc.exists)
+          {
+              var users = doc1.data().users;
+              alert(users);
+              users.push(userToAdd);
+              ref1.update({
+                users: users
+              }).then(()=>{
+                //add groupList to the user need to be added
+                var docRef1 = db.collection("users").doc(userToAdd);
+                docRef1.get().then((doc1) => {
+                    if (doc1.exists) {
+                        if(doc1.data().chatList == null)
+                        {
+                          const o = {
+                            chatRoomName: this.state.chatRoomName,
+                            chatRoomID: this.state.atChatRoomID
+                          }
+                          docRef1.update({
+                            chatList: [o]
+                        }).catch(function(error) {
+                            alert("Error writing document: ", error);
+                        });
+                        }else{
+                          const o = {
+                            chatRoomName: this.state.chatRoomName,
+                            chatRoomID: this.state.atChatRoomID
+                          }
+                        const a = doc1.data().chatList;
+                        a.push(o);
+                          docRef1.update({
+                            chatList: a
+                          }).then(() => {
+                          }).catch(function(error) {
+                              alert("Error writing document: ", error);
+                          });
+                        }
+                    }
+                  }).catch(function(error){
+                  });
+
+
+
+              })
+
+        }
+
+      }).catch((error)=>{
+            alert(error)
+        });
+    }else{    console.log(userToAdd);}
+    }).catch(()=>{
+        alert("error to add user to groupchat")
+    });
+
+
+  }
+
 
 
   render() {
@@ -254,7 +347,16 @@ document.getElementById("inputMessage").value = "";
       <div class ="chat-area">
           <div class="right-container">
             <div class="rightchat-head">Chat Room: {this.state.chatRoomName}
-              <button class="addPeopleToChat">+</button>
+              <button class="addPeopleToChat"
+              onClick={() => this.togglePopUpWindowShow()}>
+              +</button>
+              { this.state.isOpen &&
+              <PopUpWindowAddUser show={this.state.isOpen}
+                callback={this.myCallback}
+                onClose={this.togglePopUpWindow}
+                text="Email :">
+              </PopUpWindowAddUser>
+              }
             </div>
 
             <div class="chat-body">
@@ -262,6 +364,7 @@ document.getElementById("inputMessage").value = "";
                 (
                   this.state.newMessages.map(
                     msg => <div class={msg.class}>
+                    <div>{msg.time}</div>
                     <div class="sender">{msg.sender}</div>{msg.text} </div>)
                 )}
 
